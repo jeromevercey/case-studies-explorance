@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Studies Explorance — Carousel proposals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ Review chrome (not part of the design) ============ -->
+<header class="review-header">
+  <div class="small-container">
+    <p class="review-eyebrow">Explorance Blue · Section Case Studies</p>
+    <h1>3 propositions de carousel</h1>
+    <p>Chaque variante reprend les styles actuels de la page (#0064F0, #161525, fond #F6F6FB, cartes blanches ombrées). Toutes fonctionnent au clavier, au swipe mobile et au trackpad. Sur mobile, des flèches gauche/droite sont placées sous le carousel, à portée de pouce.</p>
+    <nav class="review-nav" aria-label="Variantes">
+      <a href="#v-a">A · Fidèle</a>
+      <a href="#v-b">B · Filtres par secteur</a>
+      <a href="#v-c">C · Cartes immersives</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ A ============ -->
+<aside class="review-note" id="v-a">
+  <div class="small-container">
+    <strong>A · Fidèle</strong> — Le plus proche de l'existant : 3 cartes visibles, flèches à côté du titre, pagination à points (même style que le carousel Testimonials déjà présent sur la page).
+    <span class="review-tag">Effort minimal</span>
+  </div>
+</aside>
+<section class="cs-section" style="background:#F6F6FB">
+  <div class="container">
+    <div class="small-container">
+      <div class="cs-head">
+        <div>
+          <div class="pill pill--white">Case Studies</div>
+          <h2>Discover Explorance Blue Success Stories</h2>
+        </div>
+        <div class="cs-arrows" data-arrows></div>
+      </div>
+      <div class="carousel" data-carousel aria-roledescription="carousel" aria-label="Explorance Blue case studies"></div>
+      <div class="cs-cta"><a href="https://explorance.com/case-studies/" class="btn-primary"><img src="https://marketing-web-production-strapi.azurewebsites.net/uploads/shelves_7c9b798441.svg" alt="" class="w-4">View More Success Stories</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ B ============ -->
+<aside class="review-note" id="v-b">
+  <div class="small-container">
+    <strong>B · Filtres par secteur</strong> — Des pastilles filtrent le carousel (Higher Education, Business Schools, Healthcare). Utile si la liste grandit : le visiteur trouve vite un cas qui lui ressemble.
+    <span class="review-tag">Contenu Strapi : tag secteur (existe peut-être déjà)</span>
+  </div>
+</aside>
+<section class="cs-section" style="background:#F6F6FB">
+  <div class="container">
+    <div class="small-container">
+      <div class="cs-head">
+        <div>
+          <div class="pill pill--white">Case Studies</div>
+          <h2>Discover Explorance Blue Success Stories</h2>
+        </div>
+        <div class="cs-arrows" data-arrows></div>
+      </div>
+      <div class="chips" role="group" aria-label="Filter by sector" data-chips>
+        <button class="chip is-active" aria-pressed="true" data-filter="all">All</button>
+        <button class="chip" aria-pressed="false" data-filter="higher-ed">Higher Education</button>
+        <button class="chip" aria-pressed="false" data-filter="business">Business Schools</button>
+        <button class="chip" aria-pressed="false" data-filter="healthcare">Healthcare</button>
+      </div>
+      <div class="carousel" data-carousel data-filterable aria-roledescription="carousel" aria-label="Explorance Blue case studies"></div>
+      <div class="cs-cta"><a href="https://explorance.com/case-studies/" class="btn-primary"><img src="https://marketing-web-production-strapi.azurewebsites.net/uploads/shelves_7c9b798441.svg" alt="" class="w-4">View More Success Stories</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ C ============ -->
+<aside class="review-note" id="v-c">
+  <div class="small-container">
+    <strong>C · Cartes immersives</strong> — Même mise en page que A (3 cartes, flèches à côté du titre, points), avec des cartes inspirées des carousels « à la Apple » : image de la case study en plein cadre, titre en surimpression, bouton ↗ qui pivote au survol.
+    <span class="review-tag">Plus éditorial · mêmes images qu'aujourd'hui</span>
+  </div>
+</aside>
+<section class="cs-section" style="background:#F6F6FB">
+  <div class="container">
+    <div class="small-container">
+      <div class="cs-head">
+        <div>
+          <div class="pill pill--white">Case Studies</div>
+          <h2>Discover Explorance Blue Success Stories</h2>
+        </div>
+        <div class="cs-arrows" data-arrows></div>
+      </div>
+      <div class="carousel" data-carousel data-layout="immersive" aria-roledescription="carousel" aria-label="Explorance Blue case studies"></div>
+      <div class="cs-cta"><a href="https://explorance.com/case-studies/" class="btn-primary"><img src="https://marketing-web-production-strapi.azurewebsites.net/uploads/shelves_7c9b798441.svg" alt="" class="w-4">View More Success Stories</a></div>
+    </div>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="carousel.js"></script>
+</body>
+</html>
