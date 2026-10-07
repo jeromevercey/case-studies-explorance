@@ -81,7 +81,7 @@
 <!-- ============ C ============ -->
 <aside class="review-note" id="v-c">
   <div class="small-container">
-    <strong>C · Cartes immersives</strong> — Même mise en page que A (3 cartes, flèches à côté du titre, points), avec des cartes inspirées des carousels « à la Apple » : image de la case study en plein cadre, titre en surimpression, bouton ↗ qui pivote au survol.
+    <strong>C · Cartes immersives</strong> — Même mise en page que A (3 cartes, flèches à côté du titre, points), avec des cartes inspirées des carousels « à la Apple » : image de la case study en plein cadre, titre en surimpression, bouton ↗ qui pivote au survol. Avec les mêmes filtres par secteur que B.
     <span class="review-tag">Plus éditorial · mêmes images qu'aujourd'hui</span>
   </div>
 </aside>
@@ -95,7 +95,13 @@
         </div>
         <div class="cs-arrows" data-arrows></div>
       </div>
-      <div class="carousel" data-carousel data-layout="immersive" aria-roledescription="carousel" aria-label="Explorance Blue case studies"></div>
+      <div class="chips" role="group" aria-label="Filter by sector" data-chips>
+        <button class="chip is-active" aria-pressed="true" data-filter="all">All</button>
+        <button class="chip" aria-pressed="false" data-filter="higher-ed">Higher Education</button>
+        <button class="chip" aria-pressed="false" data-filter="business">Business Schools</button>
+        <button class="chip" aria-pressed="false" data-filter="healthcare">Healthcare</button>
+      </div>
+      <div class="carousel" data-carousel data-filterable data-layout="immersive" aria-roledescription="carousel" aria-label="Explorance Blue case studies"></div>
       <div class="cs-cta"><a href="https://explorance.com/case-studies/" class="btn-primary"><img src="https://marketing-web-production-strapi.azurewebsites.net/uploads/shelves_7c9b798441.svg" alt="" class="w-4">View More Success Stories</a></div>
     </div>
   </div>

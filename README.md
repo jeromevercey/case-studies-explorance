@@ -4,7 +4,7 @@ Propositions de carousel pour la section **Case Studies** de [explorance.com/pro
 
 - **A · Fidèle** — la section actuelle en carousel : 3 cartes, flèches à côté du titre, points de pagination.
 - **B · Filtres par secteur** — A + pastilles Higher Education / Business Schools / Healthcare.
-- **C · Cartes immersives** — mise en page de A, cartes avec l'image de la case study en plein cadre et le titre en surimpression.
+- **C · Cartes immersives** — mise en page de A, cartes avec l'image de la case study en plein cadre et le titre en surimpression. Avec les filtres par secteur de B.
 - **D · Une histoire à la fois** — une case study par slide : vidéo, citation, logo de l'institution, nom et fonction de la personne. Aucune case study n'a encore de vidéo : la vidéo du header Blue sert d'exemple.
 
 Sur mobile, les flèches passent sous le carousel, de part et d'autre des points.
