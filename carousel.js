@@ -6,6 +6,7 @@
   const ICON_PREV = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const ICON_UP_RIGHT = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const SEGMENTS = { 'higher-ed': 'Higher Education', business: 'Business School', healthcare: 'Healthcare' };
+  const ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
   const ICON_NEXT = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -35,17 +36,47 @@
       </div></a>`;
   }
 
+  // Variant D: one story per slide, video on the left, quote on the right.
+  // The video sits paused on its first frame (#t=0.1 makes Safari paint it too);
+  // the overlay button on top starts playback and then gets out of the way.
+  function videoStoryHTML(st) {
+    const link = st.href
+      ? `<a class="vstory__link card__more" href="${esc(st.href)}" target="_blank" rel="noopener">${ICON_MORE}<span>Read the case study</span></a>`
+      : '';
+    return `<article class="vstory">
+      <div class="vstory__media">
+        <video class="vstory__video" src="${esc(st.video)}#t=0.1" preload="metadata" muted playsinline tabindex="-1" aria-label="${esc(st.org)} customer story"></video>
+        <button class="vstory__poster" type="button" data-play" aria-label="Play video: ${esc(st.org)} customer story">
+          <span class="pill pill--blue vstory__pill">Case Study</span>
+          <span class="vstory__play">${ICON_PLAY}</span>
+          <span class="vstory__caption"><span class="vstory__watch">Watch the story</span><span class="vstory__org">${esc(st.org)}</span></span>
+        </button>
+      </div>
+      <div class="vstory__body">
+        <img class="vstory__logo" src="${esc(st.logo)}" alt="${esc(st.org)}" loading="lazy">
+        <blockquote class="vstory__quote"><p>“${esc(st.quote)}”</p></blockquote>
+        <div class="vstory__foot">
+          <p class="vstory__person"><strong>${esc(st.name)}</strong><span>${esc(st.role)}, ${esc(st.org)}</span></p>
+          ${link}
+        </div>
+      </div>
+    </article>`;
+  }
+
+  const LAYOUTS = { immersive: immersiveCardHTML, video: videoStoryHTML };
+
   function setup(root) {
     const section = root.closest('section');
-    const data = window.CASE_STUDIES;
-    const renderCard = root.dataset.layout === 'immersive' ? immersiveCardHTML : cardHTML;
+    const data = root.dataset.source === 'stories' ? window.VIDEO_STORIES : window.CASE_STUDIES;
+    const renderCard = LAYOUTS[root.dataset.layout] || cardHTML;
+    const slideClass = root.dataset.layout === 'video' ? 'slide slide--full' : 'slide';
 
     const track = document.createElement('ul');
     track.className = 'track';
     track.tabIndex = 0;
     track.setAttribute('aria-label', 'Case studies, use arrow keys to scroll');
     track.innerHTML = data.map((cs) =>
-      `<li class="slide" role="group" aria-roledescription="slide" data-segment="${esc(cs.segment)}">${renderCard(cs)}</li>`
+      `<li class="${slideClass}" role="group" aria-roledescription="slide" data-segment="${esc(cs.segment || '')}">${renderCard(cs)}</li>`
     ).join('');
     root.appendChild(track);
 
@@ -116,7 +147,10 @@
       dotsEl.querySelectorAll('.dot').forEach((d, i) => d.setAttribute('aria-current', String(i === current)));
       slides().forEach((s, i) => s.setAttribute('aria-label', `${i + 1} of ${n}`));
 
-      const msg = `Showing case studies ${first + 1} to ${last} of ${n}`;
+      // stop any video that has scrolled out of view
+      slides().forEach((s, i) => { if (i < first || i >= last) s.querySelector('video')?.pause(); });
+
+      const msg = pv === 1 ? `Showing story ${first + 1} of ${n}` : `Showing case studies ${first + 1} to ${last} of ${n}`;
       if (msg !== lastAnnounce) { lastAnnounce = msg; live.textContent = msg; }
     }
 
@@ -138,7 +172,7 @@
     // Mouse drag (desktop). Touch and pen keep native scrolling.
     let drag = null;
     track.addEventListener('pointerdown', (e) => {
-      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('video')) return;
       drag = { x: e.clientX, left: track.scrollLeft, moved: false };
     });
     window.addEventListener('pointermove', (e) => {
@@ -165,6 +199,20 @@
       track.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); }, { capture: true, once: true });
     });
     track.addEventListener('dragstart', (e) => e.preventDefault());
+
+    // Video posters (variant D)
+    track.addEventListener('click', (e) => {
+      const poster = e.target.closest('[data-play]');
+      if (!poster) return;
+      const video = poster.previousElementSibling;
+      poster.remove();
+      video.muted = false;
+      video.controls = true;
+      video.removeAttribute('tabindex');
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      video.focus();
+    });
 
     // Sector filter chips (variant B)
     if (root.hasAttribute('data-filterable')) {

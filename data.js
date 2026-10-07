@@ -71,3 +71,64 @@ window.CASE_STUDIES = [
     "segment": "higher-ed"
   }
 ];
+
+// Variant D: one story per slide. Quotes, names, roles and logos come from the
+// Testimonials section of explorance.com/products/blue. No case study has a video
+// yet, so every story points to the same demo video (the Blue page header video).
+const DEMO_VIDEO = "https://fdendpoint-marketing-explorance-prod-01-ebh8gbhmaudgf5gd.a03.azurefd.net/web/assets/Header_Blue_Desktop_E_Nx2_7d29ca29f4.mp4";
+window.VIDEO_STORIES = [
+  {
+    "org": "The University of Chicago",
+    "logo": "https://marketing-web-production-strapi.azurewebsites.net/uploads/University_Chicago_b1815a331c.svg",
+    "quote": "In 2019, The University of Chicago invested in Explorance for our course evaluations. This journey has allowed us to integrate the tool across undergraduate, graduate, and professional schools. We selected Explorance Blue because of the ease of integration with our student information system and the quality of the platform.",
+    "name": "Scott Campbell",
+    "role": "Associate Vice President, Academic Services and University Registrar",
+    "href": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "org": "University of North Carolina",
+    "logo": "https://marketing-web-production-strapi.azurewebsites.net/uploads/University_North_Carolina_Grey_33521154d8.svg",
+    "quote": "Explorance Blue's ability to take my complicated, 42-department, 28-questionnaire, multi-report evaluation […] left me feeling confident that I can continue to improve my process and the information I will be able to share with my instructors, departments, and deans.",
+    "name": "Heather Thompson",
+    "role": "Course Evaluation Coordinator",
+    "href": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "org": "Indiana University Bloomington",
+    "logo": "https://marketing-web-production-strapi.azurewebsites.net/uploads/University_Indiana_bloomington_02_Gris_5d0339dd94.svg",
+    "quote": "They looked at tools that would meet the needs of a very decentralized schooling system. From that they determined that Explorance Blue had the greatest capabilities. We wanted to be able to pull each academic unit into the new system without losing a lot of the flexibility we had access to before.",
+    "name": "Krisy Mahome",
+    "role": "Assistant Director, Evaluation Services and Testing",
+    "href": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "org": "New York University",
+    "logo": "https://marketing-web-production-strapi.azurewebsites.net/uploads/NYC_edc14bcde4.svg",
+    "quote": "Implementing a complex course feedback system that suits fifteen schools with varied needs and expectations would not be possible without use of Explorance Blue. Blue as a product provides building blocks and one can use the product to build a robust course feedback platform.",
+    "name": "Madan Dorairaj",
+    "role": "Director, Solutions Lead Teaching and Learning and Student Affairs",
+    "href": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "org": "UNSW Sydney",
+    "logo": "https://marketing-web-production-strapi.azurewebsites.net/uploads/UNSW_Grey_36403fd5c5.svg",
+    "quote": "We recently conducted another review of all the course evaluation systems available, and we’ve found again that there is nothing else out there that can do everything that Explorance Blue does. […] In our view, there really is no better course evaluation platform out there.",
+    "name": "Paul Keitley",
+    "role": "Manager, Student Survey Systems",
+    "href": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "org": "Carnival Maritime",
+    "logo": "https://fdendpoint-marketing-explorance-prod-01-ebh8gbhmaudgf5gd.a03.azurefd.net/web/assets/Carnival_Maritime_Gris_1fe6b3d26b.png",
+    "quote": "We have more awareness about how we develop our people now. Previously promotions were quick and not always based on data, but the insight emerging through Explorance Blue will give us a better understanding of our talent base. […] Explorance Blue gives us greater flexibility.",
+    "name": "Elianne Rongen",
+    "role": "People Development Manager",
+    "href": null,
+    "video": DEMO_VIDEO
+  }
+];
