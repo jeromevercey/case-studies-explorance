@@ -46,7 +46,7 @@
     return `<article class="vstory">
       <div class="vstory__media">
         <video class="vstory__video" src="${esc(st.video)}#t=0.1" preload="metadata" muted playsinline tabindex="-1" aria-label="${esc(st.org)} customer story"></video>
-        <button class="vstory__poster" type="button" data-play" aria-label="Play video: ${esc(st.org)} customer story">
+        <button class="vstory__poster" type="button" data-play aria-label="Play video: ${esc(st.org)} customer story">
           <span class="pill pill--blue vstory__pill">Case Study</span>
           <span class="vstory__play">${ICON_PLAY}</span>
           <span class="vstory__caption"><span class="vstory__watch">Watch the story</span><span class="vstory__org">${esc(st.org)}</span></span>
