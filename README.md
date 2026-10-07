@@ -18,6 +18,7 @@ Site statique, sans build : ouvrir `index.html`.
 - `index.html` — la page de propositions
 - `styles.css` — styles repris du site (couleurs, ombres, tailles Tailwind)
 - `carousel.js` — carousel en JS natif sur `scroll-snap` (swipe, trackpad, clavier, glisser à la souris)
+- `logos/` — logos SVG des témoignages (variante D), recolorés en #ADADC5
 - `data.js` / `case-studies.json` — les 10 case studies Blue (source : explorance.com/case-studies) et les témoignages de la variante D (source : Testimonials de explorance.com/products/blue)
 
 La police du site (Oakes Grotesk) est sous licence commerciale : Inter la remplace ici.
