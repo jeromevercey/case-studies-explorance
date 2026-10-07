@@ -53,12 +53,12 @@
         </button>
       </div>
       <div class="vstory__body">
-        <img class="vstory__logo" src="${esc(st.logo)}" alt="${esc(st.org)}" loading="lazy">
         <blockquote class="vstory__quote"><p>“${esc(st.quote)}”</p></blockquote>
         <div class="vstory__foot">
           <p class="vstory__person"><strong>${esc(st.name)}</strong><span>${esc(st.role)}, ${esc(st.org)}</span></p>
           ${link}
         </div>
+        <img class="vstory__logo" src="${esc(st.logo)}" alt="${esc(st.org)}" loading="lazy">
       </div>
     </article>`;
   }
