@@ -72,64 +72,179 @@ window.CASE_STUDIES = [
   }
 ];
 
-// Variant D: one story per slide. Quotes, names, roles and logos come from the
-// Testimonials section of explorance.com/products/blue (SVG logos copied into logos/
-// and recolored to #ADADC5). No case study has a video
-// yet, so every story points to the same demo video (the Blue page header video).
+// Variant D: one case study per slide, laid out like the Figma "Video Case Studies"
+// frame (Website 2024, node 10378:45444). Tag, title, image and link come from each
+// case study page on explorance.com; quote, name and role are quoted from the same page.
+// UNLV and OpusVi have no named quote, and the first ESSEC case study is a 404, so they
+// are left out. No case study has a video yet: every slide plays the Blue header video.
+// No institution logo is published on the case study pages: `logo: null` shows the
+// institution name in the logo slot until Strapi provides one.
 const DEMO_VIDEO = "https://fdendpoint-marketing-explorance-prod-01-ebh8gbhmaudgf5gd.a03.azurefd.net/web/assets/Header_Blue_Desktop_E_Nx2_7d29ca29f4.mp4";
+const ASSETS = "https://fdendpoint-marketing-explorance-prod-01-ebh8gbhmaudgf5gd.a03.azurefd.net/web/assets/";
 window.VIDEO_STORIES = [
   {
-    "org": "The University of Chicago",
-    "logo": "logos/University_Chicago_b1815a331c.svg",
-    "quote": "In 2019, The University of Chicago invested in Explorance for our course evaluations. This journey has allowed us to integrate the tool across undergraduate, graduate, and professional schools. We selected Explorance Blue because of the ease of integration with our student information system and the quality of the platform.",
-    "name": "Scott Campbell",
-    "role": "Associate Vice President, Academic Services and University Registrar",
-    "href": null,
+    "tag": "Course Evaluation",
+    "title": "40%+ Response Rates Across 148,000 Evaluations at Coventry University with Explorance Blue",
+    "image": ASSETS + "TBL_Case_Study_Coventry_University_4_96c07803ef.jpg",
+    "href": "https://explorance.com/case-studies/40-response-rates-across-148000-evaluations-at-coventry-university-with-explorance-blue/",
+    "quote": "We needed a more robust, integrated solution that would allow confidential analysis and demographic insight. That is what led us to Explorance. We reviewed other competing tools, but Blue offered greater flexibility than the alternatives.",
+    "name": "Professor Andrew Turner",
+    "role": "Deputy Vice-Chancellor (Education)",
+    "org": "Coventry University",
+    "logo": null,
     "video": DEMO_VIDEO
   },
   {
-    "org": "University of North Carolina",
-    "logo": "logos/University_North_Carolina_Grey_33521154d8.svg",
-    "quote": "Explorance Blue's ability to take my complicated, 42-department, 28-questionnaire, multi-report evaluation […] left me feeling confident that I can continue to improve my process and the information I will be able to share with my instructors, departments, and deans.",
-    "name": "Heather Thompson",
-    "role": "Course Evaluation Coordinator",
-    "href": null,
+    "tag": "Course Evaluation",
+    "title": "From Hours to Minutes: Alamo Colleges Automates 9,000+ Course Evaluations with Explorance Blue",
+    "image": ASSETS + "TBL_Case_Study_University_Alamo_b88918e251.jpg",
+    "href": "https://www.explorance.com/case-studies/Alamo_College_From_Hours_to_Minutes/",
+    "quote": "When I set up a term, it takes me about 20 minutes to set up the project and to set up our three reports. […] With a few clicks of the mouse, it literally is what it’s all going to come down to.",
+    "name": "Steven A. Szeszko II",
+    "role": "Process Functional Manager, Office of the Vice Chancellor for Academic Success",
+    "org": "Alamo Colleges District",
+    "logo": null,
     "video": DEMO_VIDEO
   },
   {
-    "org": "Indiana University Bloomington",
-    "logo": "logos/University_Indiana_bloomington_02_Gris_5d0339dd94.svg",
-    "quote": "They looked at tools that would meet the needs of a very decentralized schooling system. From that they determined that Explorance Blue had the greatest capabilities. We wanted to be able to pull each academic unit into the new system without losing a lot of the flexibility we had access to before.",
+    "tag": "Course Evaluation",
+    "title": "From Low Response Rates to Strategic Insights: ESSEC Business School Transforms Feedback into Actionable Data with Explorance Blue",
+    "image": ASSETS + "Frame_2_14b05a2461.jpg",
+    "href": "https://explorance.com/case-studies/from-low-response-rates-to-strategic-insights-essec-business-school-transformed-feedback-into-actionable-data-with-explorance-blue/",
+    "quote": "Blue has allowed us to move from simple data collection to true performance management. We developed an in-house data management function that has inspired other departments within the school.",
+    "name": "Maëlys Pettirossi",
+    "role": "Director of Quality, Data, Operations and Control",
+    "org": "ESSEC Business School",
+    "logo": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "tag": "Staff Experience",
+    "title": "INCAE Business School Achieved 100% Survey Completion Rate with Explorance Blue",
+    "image": ASSETS + "TBL_Case_Study_INCAE_Business_School_2_17d20d8249.jpg",
+    "href": "https://explorance.com/case-studies/incae-business-school-achieved-100-survey-completion-rate-and-operational-excellence-with-explorance-blue/",
+    "quote": "We can consolidate responses and give feedback to the student in a matter of minutes, which previously took many weeks and months. […] The support we receive from the Explorance team whenever we need a new functionality, for me, is a 10 out of 10 quality service.",
+    "name": "Gabriela Obando",
+    "role": "Director of Online Experience",
+    "org": "INCAE Business School",
+    "logo": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "tag": "Course Evaluation",
+    "title": "Eliminating Manual Process and Improving Insights with Explorance Blue at Stockholm School of Economics",
+    "image": ASSETS + "TBL_Case_Study_Stockholm_School_4_ee6194bbfa.jpg",
+    "href": "https://explorance.com/case-studies/eliminating-manual-process-and-improving-insights-with-explorance-blue-at-stockholm-school-of-economics/",
+    "quote": "Integration is exactly the reason why we chose Blue and the main advantage in the beginning. […] Collecting data, exporting and processing it all takes time. Blue has saved time and brought information together in one place.",
+    "name": "Assia Viachka",
+    "role": "Quality Coordinator",
+    "org": "Stockholm School of Economics",
+    "logo": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "tag": "Course Evaluation",
+    "title": "Birkbeck, University of London Centralizes Course Evaluations Across 19 Departments with Explorance Blue",
+    "image": ASSETS + "TBL_Case_Study_Birkbeck_99f9b66fea.jpg",
+    "href": "https://explorance.com/case-studies/birkbeck-university-of-london-centralizes-course-evaluations-across-19-departments-with-explorance-blue/",
+    "quote": "Closing the loop was one of the key outcomes we wanted. If students know their feedback is being acted on, they’re more likely to participate again. […] One of the most important things is our ability to get the reports out to students without delay.",
+    "name": "Garmon ap Garth",
+    "role": "Academic Services Manager",
+    "org": "Birkbeck, University of London",
+    "logo": null,
+    "video": DEMO_VIDEO
+  },
+  {
+    "tag": "Course Evaluation",
+    "title": "Enabling Better Feedback: Del Mar College Improves Response Rates with Explorance Blue",
+    "image": ASSETS + "TBL_Case_Study_DMC_2_6f4a9cdb0f.jpg",
+    "href": "https://explorance.com/case-studies/enabling-better-feedback-del-mar-college-improves-response-rates-with-explorance-blue/",
+    "quote": "Right now, we have the best picture we’ve ever had. The comments are substantially better. Once we eliminate the outliers, we have a much more accurate picture of our students’ perspectives.",
+    "name": "Dr. Larry Lee",
+    "role": "Dean of Business, Professional and Technology Education",
+    "org": "Del Mar College",
+    "logo": null,
+    "video": DEMO_VIDEO
+  }
+];
+
+// Variant D · Image: same card without video, laid out like the Figma "Video Case Studies -
+// Multiple Images" frame (Website 2024, node 10435:5952). Six recent case studies from
+// explorance.com/case-studies not already in the video version. Tag, title, reading time
+// and image (the logo-free header image of each page) come from the case study page, as do
+// the quote, name and role.
+const CS = "https://explorance.com/case-studies/";
+window.IMAGE_STORIES = [
+  {
+    "tag": "Course Evaluation",
+    "title": "From Two Weeks to One Day: How Università della Svizzera italiana Streamlined Course Evaluation Reporting",
+    "readTime": "6 min read",
+    "image": ASSETS + "TBL_Case_Study_USI_no_logos_4f900e9b3f.jpg",
+    "href": CS + "from-two-weeks-to-one-day-how-universita-della-svizzera-italiana-streamlined-course-evaluation-reporting/",
+    "quote": "Today I have a fully supported course evaluation system based on our original model which has cut administration and workload. […] The best part of Blue is the powerful automated reporting.",
+    "name": "Michele Balmelli",
+    "role": "Responsible for the Quality Assurance Service",
+    "org": "Università della Svizzera italiana",
+    "logo": null
+  },
+  {
+    "tag": "Automation for Feedback Collection",
+    "title": "The University of Law Transforms Student Insight to Strengthen Module and Teaching Quality and Institutional Decision-Making",
+    "readTime": "6 min read",
+    "image": ASSETS + "TBL_Case_Study_University_Law_03_c2e0ea2e32.jpg",
+    "href": CS + "the-university-of-law-transforms-student-insight-to-strengthen-module-and-teaching-quality-and-institutional-decision-making/",
+    "quote": "Before Explorance, action planning could be slow. […] Now the process is much faster. We’re able to combine module quality reporting with MLY’s thematic analysis and very quickly identify the most important issues.",
+    "name": "Annie Wheeler",
+    "role": "Head of Commercial Insight",
+    "org": "The University of Law",
+    "logo": null
+  },
+  {
+    "tag": "Course Evaluation",
+    "title": "From Manual to Strategic: University of West London's Feedback Transformation",
+    "readTime": "5 min read",
+    "image": ASSETS + "TBL_Case_Study_University_West_London_2_1942cc9438.jpg",
+    "href": CS + "from-manual-to-strategic-university-of-west-londons-feedback-transformation/",
+    "quote": "We saw Blue and MLY as a good opportunity, had a demo twice, and moved to purchase them. The priority for us is to ensure students feel empowered and part of a community. Constant voice is needed, because it is only through feedback that you ever improve.",
+    "name": "Sara Raybould",
+    "role": "Senior Deputy Vice-Chancellor (Education and Student Experience)",
+    "org": "University of West London",
+    "logo": null
+  },
+  {
+    "tag": "AI",
+    "title": "37,000 Students, One Question: How the University of Newcastle Transformed Qualitative Feedback with Explorance MLY",
+    "readTime": "3 min read",
+    "image": ASSETS + "TBL_Case_Study_University_Of_Newcastle_1_0a71b49f4d.jpg",
+    "href": CS + "37000-students-one-question-how-the-university-of-newcastle-transformed-qualitative-feedback-with-explorance-mly/",
+    "quote": "The pre-trained models were a key difference for us. Other off-the-shelf text analytics tools weren’t trained using higher education comments. With MLY, we’re speaking the same language. […] We were reading comments most of the year, and now MLY is processing that workload in minutes.",
+    "name": "Meagan Morrissey",
+    "role": "Manager, Student and Staff Insights",
+    "org": "University of Newcastle",
+    "logo": null
+  },
+  {
+    "tag": "AI",
+    "title": "Saving 220+ Hours in Qualitative Analysis at Heriot-Watt with Explorance MLY",
+    "readTime": "5 min read",
+    "image": ASSETS + "heriot_watt_university_2162017f4a.jpg",
+    "href": CS + "decoding-student-and-staff-comments-at-heriot-watt-university-with-explorance-mly/",
+    "quote": "For Student Surveys, Explorance MLY software has reduced the time required to process comments from 225 hours to just 4.5 hours. […] We now have the capability to efficiently provide leaders across the institution with valuable qualitative data, making it more accessible and actionable than ever before.",
+    "name": "Kirsty Scanlan",
+    "role": "Director of Strategic Planning, Performance & Projects",
+    "org": "Heriot-Watt University",
+    "logo": null
+  },
+  {
+    "tag": "Course Evaluation",
+    "title": "Indiana University Bloomington Leverages Explorance Blue Question Bank to Streamline Course Evaluations for 46,000 Students",
+    "readTime": "2 min read",
+    "image": ASSETS + "TBL_Case_Study_Indiana_University_5_ec4dbb5d34.jpg",
+    "href": CS + "indiana-university-bloomington-leverages-explorance-blue-question-bank-to-streamline-course-evaluations-for-46000-students/",
+    "quote": "We wanted to be able to pull each academic unit into the new system without losing a lot of the flexibility we had access to before. Blue was the closest in doing that. […] We fully launched Blue online course evaluations in fall of 2015, and we had the highest response rate to date that term.",
     "name": "Krisy Mahome",
     "role": "Assistant Director, Evaluation Services and Testing",
-    "href": null,
-    "video": DEMO_VIDEO
-  },
-  {
-    "org": "New York University",
-    "logo": "logos/NYC_edc14bcde4.svg",
-    "quote": "Implementing a complex course feedback system that suits fifteen schools with varied needs and expectations would not be possible without use of Explorance Blue. Blue as a product provides building blocks and one can use the product to build a robust course feedback platform.",
-    "name": "Madan Dorairaj",
-    "role": "Director, Solutions Lead Teaching and Learning and Student Affairs",
-    "href": null,
-    "video": DEMO_VIDEO
-  },
-  {
-    "org": "UNSW Sydney",
-    "logo": "logos/UNSW_Grey_36403fd5c5.svg",
-    "quote": "We recently conducted another review of all the course evaluation systems available, and we’ve found again that there is nothing else out there that can do everything that Explorance Blue does. […] In our view, there really is no better course evaluation platform out there.",
-    "name": "Paul Keitley",
-    "role": "Manager, Student Survey Systems",
-    "href": null,
-    "video": DEMO_VIDEO
-  },
-  {
-    "org": "Carnival Maritime",
-    "logo": "https://fdendpoint-marketing-explorance-prod-01-ebh8gbhmaudgf5gd.a03.azurefd.net/web/assets/Carnival_Maritime_Gris_1fe6b3d26b.png",
-    "quote": "We have more awareness about how we develop our people now. Previously promotions were quick and not always based on data, but the insight emerging through Explorance Blue will give us a better understanding of our talent base. […] Explorance Blue gives us greater flexibility.",
-    "name": "Elianne Rongen",
-    "role": "People Development Manager",
-    "href": null,
-    "video": DEMO_VIDEO
+    "org": "Indiana University Bloomington",
+    "logo": "logos/University_Indiana_bloomington_02_Gris_5d0339dd94.svg"
   }
 ];

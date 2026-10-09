@@ -132,42 +132,90 @@ h2 { font-size: 24px; line-height: 36px; font-weight: 700; margin: 0; }
 .card-link:hover .icard__go svg { transform: rotate(45deg); }
 @media (prefers-reduced-motion: reduce) { .icard, .icard > img, .icard__go svg { transition: none; } }
 
-/* Variant D: one video story per slide */
-.track .slide--full { flex-basis: 100%; }
-.vstory { background: var(--white); border-radius: 8px; box-shadow: var(--shadow); overflow: hidden; height: 100%; display: grid; grid-template-columns: 1fr; }
-@media (min-width: 1024px) { .vstory { grid-template-columns: 1.2fr 1fr; min-height: 460px; } }
-.vstory__media { position: relative; aspect-ratio: 16 / 9; background: var(--ronflex); }
-@media (min-width: 1024px) { .vstory__media { aspect-ratio: auto; } }
-.vstory__poster {
-  position: absolute; inset: 0; width: 100%; padding: 0; border: 0; cursor: pointer; color: var(--white); text-align: left;
-  /* overlay on the first frame: keeps the pill and caption readable */
-  background:
-    linear-gradient(to bottom, rgba(22,21,37,.45) 0%, rgba(22,21,37,0) 30%),
-    linear-gradient(to top, rgba(22,21,37,.85) 0%, rgba(22,21,37,.35) 45%, rgba(22,21,37,.15) 100%);
+/* Variant D: one case study per slide (Figma "Video Case Studies", Website 2024 · 10378:45444) */
+.cs-section--story { position: relative; overflow: hidden; background: var(--white); }
+.cs-section--story .container { position: relative; }
+/* soft blue blob behind the card (Figma "Blob", already blurred and at 30% opacity in the SVG) */
+.cs-blob { position: absolute; left: 50%; top: 122px; width: 959.057px; max-width: none; height: auto; transform: translateX(calc(-50% + 50px)) rotate(-59.79deg); pointer-events: none; }
+.cs-section--story .cs-head { align-items: flex-end; margin-bottom: 32px; }
+.cs-section--story .cs-arrows { margin-bottom: 3.5px; } /* centres the 33px buttons on the 40px title line */
+.cs-section--story .cs-head > div:first-child { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
+.cs-section--story h2 { color: var(--ronflex); }
+.pill--dark { background: #000036; color: var(--white); border-radius: 4px; font-weight: 700; line-height: 18px; padding: 4px 12px; margin: 0; }
+/* Figma CTA Secondary Small: 8px radius, #E5E8EB border, 13px chevron */
+.cs-section--story .cs-arrows { gap: 16px; }
+.cs-section--story .arrow { width: 33px; height: 33px; border-radius: 8px; border-color: #E5E8EB; }
+.cs-section--story .arrow:hover:not(:disabled) { background: #F2F6FB; border-color: var(--primary); }
+/* Figma breadcrumb: blue 24×9 pill for the current slide, 8px blue rings for the others */
+.cs-bottom-nav--story { margin-top: 32px; }
+.cs-bottom-nav--story .dots { gap: 1px; }
+.cs-bottom-nav--story .dot::before { width: 8px; height: 8px; background: none; box-shadow: inset 0 0 0 1px var(--primary); transition: width .2s var(--ease); }
+.cs-bottom-nav--story .dot[aria-current="true"]::before { width: 24px; height: 9px; border-radius: 4.5px; background: var(--primary); box-shadow: none; }
+.cs-bottom-nav--story .dot:hover::before { background: #F2F6FB; }
+.cs-bottom-nav--story .dot[aria-current="true"]:hover::before { background: var(--primary); }
+.cs-section--story .cs-cta { margin-top: 48px; }
+.btn-primary--story { border-radius: 8px; line-height: 22px; padding: 11px 16px; }
+@media (max-width: 639px) {
+  .cs-bottom-nav--story .dot { width: 18px; }
+  .cs-bottom-nav--story .dot[aria-current="true"] { width: 30px; }
 }
-.vstory__poster:focus-visible { outline: 2px solid var(--white); outline-offset: -6px; }
-.vstory__pill { position: absolute; top: 24px; left: 24px; margin: 0; }
-.vstory__play { position: absolute; top: 50%; left: 50%; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; background: var(--white); color: var(--primary); display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(255,255,255,.15); transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
-.vstory__play svg { width: 28px; height: 28px; margin-left: 3px; }
-.vstory__poster:hover .vstory__play { transform: scale(1.08); box-shadow: 0 0 0 16px rgba(255,255,255,.12); }
-.vstory__caption { position: absolute; left: 24px; right: 24px; bottom: 24px; display: flex; flex-direction: column; gap: 4px; }
-.vstory__watch { font-size: .75rem; line-height: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; opacity: .8; }
-.vstory__org { font-size: 20px; line-height: 26px; font-weight: 600; }
-@media (min-width: 768px) { .vstory__org { font-size: 24px; line-height: 32px; } }
+
+.track .slide--full { flex-basis: 100%; }
+.vstory { background: var(--white); border-radius: 8px; box-shadow: 0 2px 12px rgba(54,74,113,.08), 0 4px 16px rgba(54,74,113,.04); overflow: hidden; height: 100%; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr; } /* stacked: extra height (from the tallest slide) goes to the text, not above it */
+@media (min-width: 1024px) { .vstory { grid-template-columns: 570fr 574fr; grid-template-rows: 1fr; min-height: 440px; } }
+.vstory__media { position: relative; aspect-ratio: 570 / 440; background: var(--ronflex); }
+@media (min-width: 1024px) { .vstory__media { aspect-ratio: auto; } }
+@media (max-width: 639px) { .vstory__media { aspect-ratio: 1 / 1; } } /* room for the play button above a 3-line title */
 .vstory__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+.vstory__poster { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; cursor: pointer; color: var(--white); text-align: left; background: none; overflow: hidden; }
+.vstory__poster:focus-visible { outline: 2px solid var(--white); outline-offset: -6px; }
+/* Case study images (1440×820) carry the institution logo and the Blue badge in their top 23% and a brand strip in their bottom 4%: scale up and shift so only the band in between shows */
+.vstory__image { position: absolute; top: -31.5%; left: 0; width: 100%; height: 137%; object-fit: cover; transition: transform .5s var(--ease); }
+/* Figma overlay: rgba(0,100,240,.15) down to 61.3%, then to Cetacean 75% */
+.vstory__poster::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,100,240,.15) 61.3%, rgba(0,0,54,.75) 100%); }
+.vstory__poster:hover .vstory__image { transform: scale(1.03); }
+.vstory__play { position: absolute; top: 50%; left: 50%; z-index: 1; transform: translate(-50%, -50%); padding: 18.286px; border-radius: 50%; background: rgba(255,255,255,.95); background-clip: padding-box; border: 10px solid rgba(255,255,255,.2); display: grid; place-items: center; transition: transform .25s var(--ease); }
+.vstory__poster:hover .vstory__play { transform: translate(-50%, -50%) scale(1.08); }
+.vstory__caption { position: absolute; left: 24px; right: 24px; bottom: 24px; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.vstory__tag { background: var(--white); color: var(--ronflex); border-radius: 4px; padding: 4px 12px; font-size: 12px; line-height: 18px; font-weight: 700; text-transform: uppercase; }
+@media (max-width: 639px) { .vstory__caption { left: 16px; right: 16px; bottom: 16px; gap: 12px; } }
+.vstory__title { font-size: 16px; line-height: 24px; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
 .vstory__body { padding: 24px; display: flex; flex-direction: column; gap: 24px; }
-@media (min-width: 768px) { .vstory__body { padding: 40px; } }
-.vstory__logo { height: 48px; width: auto; max-width: 240px; object-fit: contain; object-position: left center; }
+@media (min-width: 768px) { .vstory__body { padding: 32px; } }
+.vstory__mark { width: 32px; height: 27.2px; }
 .vstory__quote { margin: 0; flex-grow: 1; }
-.vstory__quote p { margin: 0; font-size: 16px; line-height: 26px; font-weight: 400; }
-@media (min-width: 1024px) { .vstory__quote p { font-size: 18px; line-height: 28px; } }
-.vstory__foot { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid var(--neutral-300); }
-.vstory__person { margin: 0; display: flex; flex-direction: column; font-size: .875rem; line-height: 1.25rem; }
-.vstory__person strong { font-size: 1rem; line-height: 1.5rem; font-weight: 600; }
-.vstory__link { align-self: flex-start; border-radius: 4px; }
-.vstory__link:hover span { text-decoration-color: var(--primary); }
-.vstory__link:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) { .vstory__play { transition: none; } }
+.vstory__quote p { margin: 0; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--ronflex); }
+@media (min-width: 1024px) { .vstory__quote p { font-size: 18px; line-height: 26px; } }
+.vstory__author { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding-top: 24px; border-top: 1px solid #E5E8EB; }
+.vstory__signature { display: flex; align-items: center; gap: 16px; }
+.vstory__avatar { flex-shrink: 0; width: 41px; height: 41px; border-radius: 50%; background: #F2F6FB; color: var(--primary); display: grid; place-items: center; font-size: 14px; font-weight: 600; }
+.vstory__person { margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 16px; line-height: 20px; font-weight: 400; }
+.vstory__person strong { font-weight: 600; }
+.vstory__logo { height: 40px; width: auto; max-width: 240px; object-fit: contain; object-position: left center; }
+/* until Strapi has a logo per case study: the institution name, in the grey of the logos */
+.vstory__logo--text { height: auto; max-width: none; display: flex; align-items: center; min-height: 40px; color: #ADADC5; font-size: 22px; line-height: 26px; font-weight: 700; letter-spacing: -.01em; }
+@media (prefers-reduced-motion: reduce) { .vstory__play, .vstory__image { transition: none; } }
+
+/* Variant D · Image (Figma "Multiple Images", 10435:5952): the left half links to the case study */
+.vstory__cover { display: block; overflow: hidden; color: var(--white); }
+.vstory__cover:focus-visible { outline: 2px solid var(--white); outline-offset: -6px; }
+/* header images are logo-free; 103% tall, anchored to the top, crops their own brand strip so the CSS one below is the same on every slide */
+.vstory--image .vstory__image { top: 0; height: 103%; object-position: center top; }
+.vstory__cover:hover .vstory__image { transform: scale(1.03); }
+/* Figma overlays: diagonal Cetacean tint, then Cetacean 75% from 61.3% down */
+.vstory__cover::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120.39deg, rgba(0,0,54,.48) 1.46%, rgba(0,0,54,.187) 42.49%, rgba(0,0,54,.12) 93.81%); }
+.vstory__cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,100,240,0) 61.3%, rgba(0,0,54,.75) 100%); }
+.vstory__strip { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; height: 6.5px; background: linear-gradient(to right, #0064F0, #7ABBFF 46.15%, #FCAE14); }
+.vstory__caption--row { flex-direction: row; align-items: flex-end; gap: 24px; bottom: 30px; }
+.vstory__text { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.vstory__read { display: flex; align-items: center; gap: 8px; font-size: 12px; line-height: 18px; font-weight: 400; }
+.vstory__go { flex-shrink: 0; width: 41px; height: 41px; border-radius: 50%; background: var(--white); display: grid; place-items: center; transition: transform .25s var(--ease); }
+.vstory__go img { transition: transform .25s var(--ease); }
+.vstory__cover:hover .vstory__go img { transform: translateX(3px); }
+@media (max-width: 639px) { .vstory__caption--row { gap: 16px; bottom: 22px; } }
+@media (prefers-reduced-motion: reduce) { .vstory__go img { transition: none; } }
+
 
 /* Variant B: chips */
 .chips { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; scrollbar-width: none; padding: 2px; }

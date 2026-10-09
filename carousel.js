@@ -36,40 +36,83 @@
       </div></a>`;
   }
 
-  // Variant D: one story per slide, video on the left, quote on the right.
+  // Variant D: one case study per slide (Figma "Video Case Studies"): video on the
+  // left with the case study tag and title over it, quote and author on the right.
   // The video sits paused on its first frame (#t=0.1 makes Safari paint it too);
   // the overlay button on top starts playback and then gets out of the way.
+  // first and last name only: skips titles, middle initials and suffixes (Dr., A., II)
+  const initials = (name) => {
+    const words = name.split(/\s+/).filter((w) => /^[A-ZÀ-Ý][a-zà-ÿ]+$/.test(w) && !/^(Dr|Professor)$/.test(w));
+    return (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : '')).toUpperCase();
+  };
+
+  // Right half shared by both story layouts: quote, author, institution logo
+  function storyBodyHTML(st) {
+    const logo = st.logo
+      ? `<img class="vstory__logo" src="${esc(st.logo)}" alt="${esc(st.org)}" loading="lazy">`
+      : `<span class="vstory__logo vstory__logo--text">${esc(st.org)}</span>`;
+    return `<div class="vstory__body">
+        <img class="vstory__mark" src="assets/quote.svg" alt="" width="32" height="27.2">
+        <blockquote class="vstory__quote" cite="${esc(st.href)}"><p>“${esc(st.quote)}”</p></blockquote>
+        <div class="vstory__author">
+          <div class="vstory__signature">
+            <span class="vstory__avatar" aria-hidden="true">${esc(initials(st.name))}</span>
+            <p class="vstory__person"><strong>${esc(st.name)}</strong><span>${esc(st.role)}, ${esc(st.org)}</span></p>
+          </div>
+          ${logo}
+        </div>
+      </div>`;
+  }
+
   function videoStoryHTML(st) {
-    const link = st.href
-      ? `<a class="vstory__link card__more" href="${esc(st.href)}" target="_blank" rel="noopener">${ICON_MORE}<span>Read the case study</span></a>`
-      : '';
     return `<article class="vstory">
       <div class="vstory__media">
-        <video class="vstory__video" src="${esc(st.video)}#t=0.1" preload="metadata" muted playsinline tabindex="-1" aria-label="${esc(st.org)} customer story"></video>
-        <button class="vstory__poster" type="button" data-play aria-label="Play video: ${esc(st.org)} customer story">
-          <span class="pill pill--blue vstory__pill">Case Study</span>
-          <span class="vstory__play">${ICON_PLAY}</span>
-          <span class="vstory__caption"><span class="vstory__watch">Watch the story</span><span class="vstory__org">${esc(st.org)}</span></span>
+        <video class="vstory__video" src="${esc(st.video)}#t=0.1" poster="${esc(st.image)}" preload="none" muted playsinline tabindex="-1" aria-label="${esc(st.org)} customer story"></video>
+        <button class="vstory__poster" type="button" data-play aria-label="Play video: ${esc(st.title)}">
+          <img class="vstory__image" src="${esc(st.image)}" alt="" loading="lazy">
+          <span class="vstory__play"><img src="assets/play.svg" alt="" width="19.4286" height="19.4286"></span>
+          <span class="vstory__caption">
+            <span class="vstory__tag">${esc(st.tag)}</span>
+            <span class="vstory__title">${esc(st.title)}</span>
+          </span>
         </button>
       </div>
-      <div class="vstory__body">
-        <blockquote class="vstory__quote"><p>“${esc(st.quote)}”</p></blockquote>
-        <div class="vstory__foot">
-          <p class="vstory__person"><strong>${esc(st.name)}</strong><span>${esc(st.role)}, ${esc(st.org)}</span></p>
-          ${link}
-        </div>
-        <img class="vstory__logo" src="${esc(st.logo)}" alt="${esc(st.org)}" loading="lazy">
-      </div>
+      ${storyBodyHTML(st)}
     </article>`;
   }
 
-  const LAYOUTS = { immersive: immersiveCardHTML, video: videoStoryHTML };
+  // Variant D · Image (Figma "Multiple Images"): the left half is a link to the case study,
+  // with tag, title, reading time and a round arrow button over the image.
+  function imageStoryHTML(st) {
+    return `<article class="vstory vstory--image">
+      <a class="vstory__media vstory__cover" href="${esc(st.href)}" target="_blank" rel="noopener" aria-label="Read the case study: ${esc(st.title)}">
+        <img class="vstory__image" src="${esc(st.image)}" alt="" loading="lazy">
+        <span class="vstory__strip"></span>
+        <span class="vstory__caption vstory__caption--row">
+          <span class="vstory__text">
+            <span class="vstory__tag">${esc(st.tag)}</span>
+            <span class="vstory__title">${esc(st.title)}</span>
+            <span class="vstory__read"><img src="assets/timer.svg" alt="" width="13" height="13">${esc(st.readTime)}</span>
+          </span>
+          <span class="vstory__go"><img src="assets/arrow-go.svg" alt="" width="17" height="17"></span>
+        </span>
+      </a>
+      ${storyBodyHTML(st)}
+    </article>`;
+  }
+
+  const LAYOUTS = { immersive: immersiveCardHTML, video: videoStoryHTML, image: imageStoryHTML };
+  const SOURCES = { stories: () => window.VIDEO_STORIES, 'image-stories': () => window.IMAGE_STORIES };
 
   function setup(root) {
     const section = root.closest('section');
-    const data = root.dataset.source === 'stories' ? window.VIDEO_STORIES : window.CASE_STUDIES;
+    const data = SOURCES[root.dataset.source]?.() || window.CASE_STUDIES;
     const renderCard = LAYOUTS[root.dataset.layout] || cardHTML;
-    const slideClass = root.dataset.layout === 'video' ? 'slide slide--full' : 'slide';
+    const isStory = root.dataset.layout === 'video' || root.dataset.layout === 'image';
+    const slideClass = isStory ? 'slide slide--full' : 'slide';
+    // Variant D uses the Figma chevrons
+    const prevIcon = isStory ? '<img src="assets/arrow-left.svg" alt="" width="13" height="13">' : ICON_PREV;
+    const nextIcon = isStory ? '<img src="assets/arrow-right.svg" alt="" width="13" height="13">' : ICON_NEXT;
 
     const track = document.createElement('ul');
     track.className = 'track';
@@ -88,17 +131,17 @@
     // Arrows
     const arrowsHost = section.querySelector('[data-arrows]');
     arrowsHost.innerHTML =
-      `<button class="arrow" type="button" aria-label="Previous case studies">${ICON_PREV}</button>` +
-      `<button class="arrow" type="button" aria-label="Next case studies">${ICON_NEXT}</button>`;
+      `<button class="arrow" type="button" aria-label="Previous case studies">${prevIcon}</button>` +
+      `<button class="arrow" type="button" aria-label="Next case studies">${nextIcon}</button>`;
 
     // Nav bar under the carousel: [prev] [dots] [next].
     // Its arrows only show on mobile, where the header arrows are hidden (CSS).
     const bottomNav = document.createElement('div');
-    bottomNav.className = 'cs-bottom-nav';
+    bottomNav.className = isStory ? 'cs-bottom-nav cs-bottom-nav--story' : 'cs-bottom-nav';
     bottomNav.innerHTML =
-      `<button class="arrow" type="button" aria-label="Previous case studies">${ICON_PREV}</button>` +
+      `<button class="arrow" type="button" aria-label="Previous case studies">${prevIcon}</button>` +
       `<div class="dots"></div>` +
-      `<button class="arrow" type="button" aria-label="Next case studies">${ICON_NEXT}</button>`;
+      `<button class="arrow" type="button" aria-label="Next case studies">${nextIcon}</button>`;
     root.after(bottomNav);
     const dotsEl = bottomNav.querySelector('.dots');
     const arrowButtons = [...arrowsHost.children, ...bottomNav.querySelectorAll('.arrow')];
