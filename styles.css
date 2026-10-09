@@ -191,7 +191,7 @@ h2 { font-size: 24px; line-height: 36px; font-weight: 700; margin: 0; }
 .vstory__body { padding: 24px; display: flex; flex-direction: column; gap: 24px; }
 @media (min-width: 768px) { .vstory__body { padding: 32px; } }
 .vstory__quote { margin: 0; flex-grow: 1; }
-.vstory__quote p { margin: 0; font-size: 16px; line-height: 24px; font-weight: 500; font-style: italic; color: var(--ronflex); }
+.vstory__quote p { margin: 0; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--ronflex); }
 @media (min-width: 1024px) { .vstory__quote p { font-size: 18px; line-height: 26px; } }
 .vstory__author { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding-top: 24px; border-top: 1px solid #E5E8EB; }
 .vstory__signature { display: flex; align-items: center; gap: 16px; }
