@@ -155,6 +155,13 @@ h2 { font-size: 24px; line-height: 36px; font-weight: 700; margin: 0; }
 .cs-bottom-nav--story .dot[aria-current="true"]:hover::before { background: var(--primary); }
 .cs-section--story .cs-cta { margin-top: 48px; }
 .btn-primary--story { border-radius: 8px; line-height: 22px; padding: 11px 16px; }
+/* Mobile spacing from explorance.com (section heads: tag mb-4, head mb-6, py-12) */
+@media (max-width: 767px) {
+  .cs-section--story .cs-head { margin-bottom: 24px; }
+  .cs-section--story .cs-head > div:first-child { gap: 16px; }
+  .cs-bottom-nav--story { margin-top: 24px; }
+  .cs-section--story .cs-cta { margin-top: 32px; }
+}
 @media (max-width: 639px) {
   .cs-bottom-nav--story .dot { width: 18px; }
   .cs-bottom-nav--story .dot[aria-current="true"] { width: 30px; }
