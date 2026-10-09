@@ -52,7 +52,6 @@
       ? `<img class="vstory__logo" src="${esc(st.logo)}" alt="${esc(st.org)}" loading="lazy">`
       : `<span class="vstory__logo vstory__logo--text">${esc(st.org)}</span>`;
     return `<div class="vstory__body">
-        <img class="vstory__mark" src="assets/quote.svg" alt="" width="32" height="27.2">
         <blockquote class="vstory__quote" cite="${esc(st.href)}"><p>“${esc(st.quote)}”</p></blockquote>
         <div class="vstory__author">
           <div class="vstory__signature">
